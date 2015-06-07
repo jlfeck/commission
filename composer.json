@@ -1,0 +1,16 @@
+{
+  	"require": {
+        "slim/slim": "2.*",
+        "slim/views": "*",
+        "twig/twig": "*",
+        "twig/extensions": "*",
+        "illuminate/database": "*"
+	},
+	"autoload": {
+        "classmap": [
+            "src/model",
+            "src/controller",
+            "src/libs/util"
+        ]
+    }
+}
