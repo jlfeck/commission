@@ -1,0 +1,5 @@
+!vendor/*
+/vendor/
+!public/vendor/*
+/public/vendor/
+config/database.config.php
