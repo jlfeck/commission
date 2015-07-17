@@ -1,0 +1,53 @@
+{% extends "panel.twig" %}
+
+{% block panel %}
+
+<h2 class="page-header">Colaboradores</h2>
+
+  {% if error is not empty %}
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        {{ error }}
+      </div>
+  {% endif %}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <a class="btn btn-success" href="{{ baseUrl() }}/collaborator/new"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+
+    <div class="panel-body">
+      <div class="row header-table">
+        <div class="col-xs-1 col-md-2">ID</div>
+        <div class="col-xs-3 col-md-4">Nome</div>
+        <div class="col-xs-2 col-md-4">Telefone</div>
+        <div class="col-xs-2 col-md-2">Ações</div>
+      </div>
+      <div class="row content-table">
+        {% if collaborators is not empty %}
+          {% for collaborator in collaborators %}
+            <div class="line-table">
+              <div class="col-xs-1 col-md-2">{{ collaborator.id }}</div>
+              <div class="col-xs-3 col-md-4">{{ collaborator.name }}</div>
+              <div class="col-xs-2 col-md-4">{{ collaborator.phone }}</div>
+              <div class="col-xs-2 col-md-2">
+                <a href="{{ baseUrl() }}/collaborator/edit/{{ collaborator.id }}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>
+                <button data-url="{{ baseUrl() }}/collaborator/delete/{{ collaborator.id }}" onclick="confirmDelete(this)" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+            <div class="line-table text-center">
+              <div class="col-xs-12 col-md-12">Não foram encontrados registros</div>
+            </div>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+
+  {% include 'pagination.twig' %}
+
+{% endblock %}

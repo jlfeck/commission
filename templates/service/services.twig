@@ -1,0 +1,53 @@
+{% extends "panel.twig" %}
+
+{% block panel %}
+
+<h2 class="page-header">Serviços</h2>
+
+  {% if error is not empty %}
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        {{ error }}
+      </div>
+  {% endif %}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <a class="btn btn-success" href="{{ baseUrl() }}/service/new"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+
+    <div class="panel-body">
+      <div class="row header-table">
+        <div class="col-xs-2 col-md-1">ID</div>
+        <div class="col-xs-4 col-md-6">Nome</div>
+        <div class="col-xs-2 col-md-2">Porcentagem</div>
+        <div class="col-xs-4 col-md-3">Ações</div>
+      </div>
+      <div class="row content-table">
+        {% if services is not empty %}
+          {% for service in services %}
+            <div class="line-table">
+              <div class="col-xs-2 col-md-1">{{ service.id }}</div>
+              <div class="col-xs-4 col-md-6">{{ service.name }}</div>
+              <div class="col-xs-2 col-md-2">{{ service.percent }}</div>
+              <div class="col-xs-4 col-md-3">
+                <a href="{{ baseUrl() }}/service/edit/{{ service.id }}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>
+                <button data-url="{{ baseUrl() }}/service/delete/{{ service.id }}" onclick="confirmDelete(this)" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+            <div class="line-table text-center">
+              <div class="col-xs-12 col-md-12">Não foram encontrados registros</div>
+            </div>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+
+  {% include 'pagination.twig' %}
+
+{% endblock %}

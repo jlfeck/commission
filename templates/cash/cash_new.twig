@@ -1,0 +1,42 @@
+{% extends "panel.twig" %}
+
+{% block panel %}
+
+<h2 class="page-header">Caixa</h2>
+
+	{% if error is not empty %}
+    	<div class="alert alert-warning alert-dismissible" role="alert">
+    	  <button type="button" class="close" data-dismiss="alert">
+    	  	<span aria-hidden="true">&times;</span>
+    	  	<span class="sr-only">Close</span>
+    	  </button>
+    	  {{ error }}
+    	</div>
+	{% endif %}
+	<form method="POST" action="{{ baseUrl() }}/cash/new" class="form-horizontal" role="form">
+
+		<div class="form-group">
+		  <label for="" class="col-sm-2 control-label">Data</label>
+		  <div class="col-sm-4 calendar-svcd">
+		    <input type="text" class="form-control" name="date" placeholder="00/00/0000">
+		  </div>
+		  <label for="" class="col-sm-1 control-label">Total</label>
+		  <div class="col-sm-4">
+		    <input type="text" class="form-control disabled" name="total">
+		  </div>
+		</div>
+		<div class="form-group">
+		  <label for="" class="col-sm-2 control-label">Observação</label>
+		  <div class="col-sm-9">
+		  	<textarea class="form-control" name="observation" placeholder="Observação" rows="5"></textarea>
+		  </div>
+		</div>
+
+		<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-5">
+		  <button type="submit" class="btn btn-default">Salvar</button>
+		</div>
+		</div>
+	</form>
+
+{% endblock %}
